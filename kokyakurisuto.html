@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pushpin:text</title>
+    <meta charset="utf-8">
+    <style>body{padding:0;margin:0;background:#333;}h1{padding:0;margin:0;font-size:50%;color:white;}</style>
+</head>
+<body>
+
+    <h1>Select Maps Type
+        <select id="type">
+            <option value="road" selected>road</option>
+            <option value="aerial">aerial</option>
+            <option value="canvasDark">canvasDark</option>
+            <option value="canvasLight">canvasLight</option>
+            <option value="birdseye">birdseye</option>
+            <option value="grayscale">grayscale</option>
+            <option value="streetside">streetside</option>
+        </select>
+    </h1>
+    <div id="myMap" style='position:relative;width:100%;height:450px;'></div>
+
+    <!-- ※顧客宅をクリックで記録※ -->
+    <!-- <div id="inputForm" style="display:none;">
+        <table>
+            <tr><td colspan="2"></td></tr>
+            <tr><td>Title</td><td><input id="titleTbx" type="text" /></td></tr>
+            <tr><td>Description</td><td><input id="descriptionTbx" type="text" /></td></tr>
+            <tr><td colspan="2"><input type="button" value="Save" onclick="saveData()" style="float:right;"/></td></tr>
+        </table>
+    </div> -->
+
+
+<!-- [ Pushpin Object ] https://msdn.microsoft.com/en-us/library/mt712673.aspx -->
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AkvqBToNl-ZdrGiebr2QyM1rg59qmIdD7Pylrc9gpwgnGkM9idSYrYa0IOTUHzBr' async defer></script>
+<script>
+    let map, typeid;  
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#myMap', {
+            center: new Microsoft.Maps.Location(43.054077, 141.351757), //Location center position
+        });
+
+        //Get MAP Infomation
+        let center = map.getCenter();
+
+        //Create custom Pushpin
+        let pin = new Microsoft.Maps.Pushpin(center,{
+            title: 'きょうど料理亭杉ノ目',       //PushPin:title
+            subTitle: '',  //PushPin:subtitle
+            text: '杉'                 //PushPin:text
+        });
+
+        //Add the pushpin to the map
+        map.entities.push(pin);
+    }
+
+// <!-- [ MapTypeId ] https://msdn.microsoft.com/en-us/library/mt712700.aspx -->
+
+    //***********************************************************************************
+    // BingMaps Init
+    //***********************************************************************************
+    
+    // function GetMap() {
+    //     map = new Microsoft.Maps.Map('#myMap', {
+    //         center: new Microsoft.Maps.Location(43.054077, 141.351757 ,20), //location set
+    //         mapTypeId: Microsoft.Maps.MapTypeId.load, //aerial,canvasDark,canvasLight,birdseye,grayscale,load,streetside
+    //         zoom: 16 //ZoomIn=20~Zoomout=1
+    //     });
+    // }
+    //***********************************************************************************
+    //Select MapTypeID　表示切り替え！！！！
+    //***********************************************************************************
+    document.getElementById("type").onchange = function(){
+        typeid = this.value; //selectboxの値を取得
+        if(typeid == "load") type = {mapTypeId: Microsoft.Maps.MapTypeId.load};
+        if(typeid == "aerial") type = {mapTypeId: Microsoft.Maps.MapTypeId.aerial};
+        if(typeid == "canvasDark") type = {mapTypeId: Microsoft.Maps.MapTypeId.canvasDark};
+        if(typeid == "canvasLight") type = {mapTypeId: Microsoft.Maps.MapTypeId.canvasLight};
+        if(typeid == "birdseye") type = {mapTypeId: Microsoft.Maps.MapTypeId.birdseye};
+        if(typeid == "grayscale") type = {mapTypeId: Microsoft.Maps.MapTypeId.grayscale};
+        if(typeid == "streetside") type = {mapTypeId: Microsoft.Maps.MapTypeId.streetsaide};
+        //add type
+        map.setView(type);
+    };
+
+
+    // $ curl -s https://api.sssapi.app/eLDmhoyEzgHvaWgUSY0Ga
+
+
+    // ゴールから逆算してどんな機能を持たせるか因数分解
+
+
+
+    // 緯度経度に分ける
+    // データを一つ一つとってくる・・・・constdata→
+    // →緯度経度をとる・・・constlat   
+    // →マップに入れる・・・
+    // ✖️繰り返し
+    // 引数
+    // 配列繰り返し
+
+    // return いど経度
+
+// とってきた値からの関数
+
+// const data =  {
+//     "id": 1,
+//     "name": "佐々木様",
+//     "use": "1ヶ月前",
+//     "ido": 43.053182,
+//     "keido": 141.334067
+//   }
+
+// const lat = data.ido
+// const lon = data.keido
+
+
+
+
+        // let map = new Microsoft.Maps.Map('#myMap', {
+        //     center: new Microsoft.Maps.Location(43.053182, 141.334067),
+            
+        // });
+
+
+
+// let pin = new Microsoft.Maps.Pushpin(43.053182, 141.334067) 
+// {
+//             title: 'name',       //PushPin:title
+//             subTitle: 'use',  //PushPin:subtitle
+//             text: '杉'                 //PushPin:text
+//         });
+
+        //Add the pushpin to the map
+        map.entities.push(pin);
+
+
+
+// 関数、引数　　からのマップへ
+
+
+    [
+  {
+    "id": 1,
+    "name": "佐々木様",
+    "use": "1ヶ月前",
+    "経度": 43.053182,
+    "緯度": 141.334067
+  },
+  {
+    "id": 2,
+    "name": "佐藤様",
+    "use": "3ヶ月前",
+    "経度": 43.055115,
+    "緯度": 141.316332
+  },
+  {
+    "id": 3,
+    "name": "鈴木様",
+    "use": "6ヶ月前",
+    "経度": 43.055574,
+    "緯度": 141.300136
+  },
+  {
+    "id": 4,
+    "name": "宮川様",
+    "use": "1年前",
+    "経度": 43.05693,
+    "緯度": 141.297406
+  },
+  {
+    "id": 5,
+    "name": "待村様",
+    "use": "1ヶ月前",
+    "経度": 43.031842,
+    "緯度": 141.324519
+  },
+  {
+    "id": 6,
+    "name": "古川様",
+    "use": "3ヶ月前",
+    "経度": 43.033076,
+    "緯度": 141.325447
+  },
+  {
+    "id": 7,
+    "name": "野山様",
+    "use": "6ヶ月前",
+    "経度": 43.071596,
+    "緯度": 141.360556
+  }
+]
+
+// <!-- ※顧客宅をクリックで記録※ -->
+// let map, infobox, currentPushpin;
+//     function GetMap() {
+//         map = new Microsoft.Maps.Map('#myMap', {});
+//         //Add a click event to the map.
+//         Microsoft.Maps.Events.addHandler(map, 'click', mapClicked);
+//         //Create an infobox, but hide it. We can reuse it for each pushpin.
+//         infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
+//         infobox.setMap(map);
+//     }
+//     function mapClicked(e) {
+//         //Create a pushpin.
+//         currentPushpin = new Microsoft.Maps.Pushpin(e.location);
+//         //Add a click event to the pushpin.
+//         Microsoft.Maps.Events.addHandler(currentPushpin, 'click', pushpinClicked);
+//         //Add the pushpin to the map.
+//         map.entities.push(currentPushpin);
+//         //Open up an input form here the user can enter in details for pushpin.
+//         document.getElementById('inputForm').style.display = '';
+//     }
+//     function saveData() {
+//         //Get the data from form and add it to the pushpin
+//         currentPushpin.metadata = {
+//             title: document.getElementById('titleTbx').value,
+//             description: document.getElementById('descriptionTbx').value
+//         };
+//         //Optionally save this data somewhere (like a database or local storage).
+
+//         //Clear the fields in the form and then hide the form.
+//         document.getElementById('titleTbx').value = '';
+//         document.getElementById('descriptionTbx').value = '';
+//         document.getElementById('inputForm').style.display = 'none';
+//     }
+//     function pushpinClicked(e) {
+//         if (e.target.metadata) {
+//             infobox.setOptions({
+//                 location: e.target.getLocation(),
+//                 title: e.target.metadata.title,
+//                 description: e.target.metadata.description,
+//                 visible: true
+//             });
+//         }
+//     }
+
+</script>
+
+
+</body>
+</html>
